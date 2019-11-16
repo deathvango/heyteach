@@ -25,7 +25,7 @@ hello-world                latest              fce289e99eb9        10 months ago
 
 1. To run the image use:
 ```
-PS C:\Path> docker run -p 49160:8080 -d <web app name>
+PS C:\Path> docker run -p 49160:8080 -d <web app name>:latest
 ```
 _*```-d``` runs the container in detached mode, meaning it will run in the background_
 
