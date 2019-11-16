@@ -1,3 +1,6 @@
 # library junk
 .next/
 node_modules
+
+# build directories
+dist/
