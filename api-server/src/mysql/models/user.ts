@@ -15,6 +15,7 @@ import {
   Index
 } from "sequelize-typescript";
 import { ModelAttributeColumnOptions } from "sequelize/types";
+const uuid = require("uuid/v4");
 
 @Scopes(() => ({
   users: {
@@ -30,7 +31,7 @@ import { ModelAttributeColumnOptions } from "sequelize/types";
 export default class User extends Model<User> {
   @IsUUID(4)
   @PrimaryKey
-  @Default("UUIDv4/1")
+  @Default(() => uuid())
   @Column(DataType.UUID)
   id!: string;
 
