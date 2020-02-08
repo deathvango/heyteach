@@ -1,6 +1,8 @@
 import express from "express";
 import graphqlHttp from "express-graphql";
 import { buildSchema } from "graphql";
+import { users } from "./routes/usersRoute";
+import { HeyTeachContext } from "./mysql/context";
 
 // GraphQL Schema
 const schema = buildSchema(`
@@ -39,8 +41,17 @@ app.use(
   })
 );
 
+app.use("/users", users);
+
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-app.listen(PORT, HOST, () => console.log(`Listening on ${HOST}:${PORT}`));
+(async () => {
+  try {
+    await HeyTeachContext.sync({ force: true });
+    app.listen(PORT, HOST, () => console.log(`Listening on ${HOST}:${PORT}`));
+  } catch (e) {
+    console.log(e);
+  }
+})();
