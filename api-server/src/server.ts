@@ -4,6 +4,11 @@ import { buildSchema } from "graphql";
 import { users } from "./routes/usersRoute";
 import { HeyTeachContext } from "./mysql/context";
 import * as bodyParser from "body-parser";
+import _ from "lodash";
+import faker from "faker";
+import User from "./mysql/models/user";
+import Person from "./mysql/models/person";
+import Address from "./mysql/models/address";
 
 // GraphQL Schema
 const schema = buildSchema(`
@@ -66,7 +71,34 @@ app.get("/", (req, res) => {
 
 (async () => {
   try {
-    await HeyTeachContext.sync({ force: true });
+    HeyTeachContext.sync({ force: true }).then(() => {
+      _.times(10, () => {
+        return User.create({
+          username: faker.internet.email()
+        }).then(u => {
+          Person.create({
+            userId: u.id,
+            firstName: faker.name.firstName(),
+            lastName: faker.name.lastName(),
+            phone: faker.phone.phoneNumber()
+          }).then(p => {
+            const addr = new Address();
+            console.log("ZIP: " + faker.address.zipCode());
+            Address.create({
+              lineOne: faker.address.streetAddress(),
+              state: faker.address.stateAbbr(),
+              zip: faker.address.zipCode(),
+              city: faker.address.city()
+            }).then(a => {
+              p.update({
+                addressId: a.id
+              });
+            });
+          });
+        });
+      });
+    });
+
     app.listen(PORT, HOST, () => console.log(`Listening on ${HOST}:${PORT}`));
   } catch (e) {
     console.log(e);
