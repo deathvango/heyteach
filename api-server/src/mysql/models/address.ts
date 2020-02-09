@@ -10,22 +10,25 @@ import {
   Default,
   IsUUID,
   Unique,
-  AllowNull
+  AllowNull,
+  ForeignKey,
+  BelongsTo
 } from "sequelize-typescript";
+import User from "./user";
 const uuid = require("uuid/v4");
 
 @Scopes(() => ({
-  users: {
+  addresses: {
     include: [
       {
-        model: User,
+        model: Address,
         through: { attributes: [] }
       }
     ]
   }
 }))
 @Table
-export default class User extends Model<User> {
+export default class Address extends Model<Address> {
   @IsUUID(4)
   @PrimaryKey
   @Default(() => uuid())
@@ -33,9 +36,20 @@ export default class User extends Model<User> {
   id!: string;
 
   @AllowNull(false)
-  @Unique
-  @Column(DataType.STRING(50))
-  username!: string;
+  @Column(DataType.STRING(255))
+  lineOne!: string;
+
+  @Column(DataType.STRING(255))
+  lineTwo?: string;
+
+  @Column(DataType.STRING(255))
+  city?: string;
+
+  @Column(DataType.STRING(2))
+  state?: string;
+
+  @Column(DataType.STRING(10))
+  zip?: string;
 
   @AllowNull(false)
   @CreatedAt
