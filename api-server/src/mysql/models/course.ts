@@ -30,12 +30,4 @@ export default class Course extends Model<Course> {
 
   @Column(DataType.STRING(255))
   description?: string;
-
-  @AllowNull(false)
-  @ForeignKey(() => Category)
-  @Column(DataType.UUID)
-  categoryId!: string;
-
-  @BelongsTo(() => Category)
-  category!: Category;
 }

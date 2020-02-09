@@ -31,10 +31,14 @@ export default class Lesson extends Model<Lesson> {
   @AllowNull(false)
   @ForeignKey(() => Period)
   @Column(DataType.UUID)
-  periodId?: string;
+  periodId!: string;
 
   @BelongsTo(() => Period)
   period?: Course;
+
+  @AllowNull(false)
+  @Column(DataType.DATE)
+  dayOf!: Date;
 
   @BelongsToMany(
     () => Student,

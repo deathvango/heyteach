@@ -17,7 +17,7 @@ export default class InstructorLesson extends Model<InstructorLesson> {
   @AllowNull(false)
   @ForeignKey(() => Instructor)
   @Column(DataType.UUID)
-  instructorId?: string;
+  instructorId!: string;
 
   @BelongsTo(() => Instructor)
   instructor?: Instructor;
@@ -29,7 +29,7 @@ export default class InstructorLesson extends Model<InstructorLesson> {
   lessonId!: string;
 
   @BelongsTo(() => Lesson)
-  lesson!: Lesson;
+  lesson?: Lesson;
 
   @Column(DataType.DATE)
   inactivatedAt?: Date;

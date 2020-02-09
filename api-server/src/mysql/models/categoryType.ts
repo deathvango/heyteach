@@ -17,10 +17,6 @@ export default class CategoryType extends Model<CategoryType> {
   @Column(DataType.STRING(10))
   type!: string;
 
-  @AllowNull(false)
-  @Column(DataType.STRING(50))
-  name!: string;
-
   @Column(DataType.STRING(255))
-  description!: string;
+  description?: string;
 }

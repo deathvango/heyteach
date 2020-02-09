@@ -28,7 +28,7 @@ export default class Instructor extends Model<Instructor> {
   @AllowNull(false)
   @ForeignKey(() => Person)
   @Column(DataType.UUID)
-  personId?: string;
+  personId!: string;
 
   @BelongsTo(() => Person)
   person?: Person;

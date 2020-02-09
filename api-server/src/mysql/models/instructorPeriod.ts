@@ -19,7 +19,7 @@ export default class InstructorPeriod extends Model<InstructorPeriod> {
   @AllowNull(false)
   @ForeignKey(() => Instructor)
   @Column(DataType.UUID)
-  instructorId?: string;
+  instructorId!: string;
 
   @BelongsTo(() => Instructor)
   instructor?: Instructor;
@@ -28,7 +28,7 @@ export default class InstructorPeriod extends Model<InstructorPeriod> {
   @AllowNull(false)
   @ForeignKey(() => Period)
   @Column(DataType.UUID)
-  periodId?: string;
+  periodId!: string;
 
   @BelongsTo(() => Period)
   period?: Period;

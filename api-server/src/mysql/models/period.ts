@@ -23,6 +23,7 @@ import Student from "./student";
 import Instructor from "./instructor";
 import StudentPeriod from "./studentPeriod";
 import InstructorPeriod from "./instructorPeriod";
+import Category from "./category";
 const uuid = require("uuid/v4");
 
 @Table
@@ -37,10 +38,19 @@ export default class Period extends Model<Period> {
   @AllowNull(false)
   @ForeignKey(() => Course)
   @Column(DataType.UUID)
-  courseId?: string;
+  courseId!: string;
 
   @BelongsTo(() => Course)
   course?: Course;
+
+  @IsUUID(4)
+  @AllowNull(false)
+  @ForeignKey(() => Category)
+  @Column(DataType.UUID)
+  categoryId!: string;
+
+  @BelongsTo(() => Category)
+  category?: Category;
 
   @BelongsToMany(
     () => Student,
