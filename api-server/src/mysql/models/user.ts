@@ -10,8 +10,11 @@ import {
   Default,
   IsUUID,
   Unique,
-  AllowNull
+  AllowNull,
+  BelongsTo,
+  HasOne
 } from "sequelize-typescript";
+import Person from "./person";
 const uuid = require("uuid/v4");
 
 @Scopes(() => ({
@@ -46,4 +49,7 @@ export default class User extends Model<User> {
   @UpdatedAt
   @Column(DataType.DATE)
   updatedAt!: Date;
+
+  @HasOne(() => Person)
+  person!: Person;
 }

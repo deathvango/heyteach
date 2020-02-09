@@ -1,7 +1,5 @@
 import express from "express";
-import graphqlHttp from "express-graphql";
-import { buildSchema } from "graphql";
-import { users } from "./routes/usersRoute";
+import GraphHttp from "express-graphql";
 import { HeyTeachContext } from "./mysql/context";
 import * as bodyParser from "body-parser";
 import _ from "lodash";
@@ -9,34 +7,12 @@ import faker from "faker";
 import User from "./mysql/models/user";
 import Person from "./mysql/models/person";
 import Address from "./mysql/models/address";
-
-// GraphQL Schema
-const schema = buildSchema(`
-  type Query {
-    rollDice(numDice: Int!, numSides: Int): [Int]
-  }
-`);
-
-interface RollDiceDto {
-  numDice: number;
-  numSides?: number;
-}
-
-// GraphQL root resolver function for each API endpoint
-const root = {
-  rollDice: (req: RollDiceDto) => {
-    let output: number[] = [];
-    for (let i = 0; i < req.numDice; ++i) {
-      output.push(1 + Math.floor(Math.random() * (req.numSides || 6)));
-    }
-    return output;
-  }
-};
+import HeyTeachGqlSchema from "./graphql/schema";
 
 // Express initialization
 const app = express();
-const PORT = 5000;
-const HOST = "0.0.0.0";
+const APP_PORT = 5000;
+const APP_HOST = "0.0.0.0";
 
 // middleware for parsing application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -54,17 +30,17 @@ app.use((req, res, next) => {
   next();
 });
 
+// GraphQL endpoint
 app.use(
   "/graphql",
-  graphqlHttp({
-    schema: schema,
-    rootValue: root,
+  GraphHttp({
+    schema: HeyTeachGqlSchema,
+    pretty: true,
     graphiql: true
   })
 );
 
-app.use("/users", users);
-
+// Root
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
@@ -83,7 +59,6 @@ app.get("/", (req, res) => {
             phone: faker.phone.phoneNumber()
           }).then(p => {
             const addr = new Address();
-            console.log("ZIP: " + faker.address.zipCode());
             Address.create({
               lineOne: faker.address.streetAddress(),
               state: faker.address.stateAbbr(),
@@ -99,7 +74,9 @@ app.get("/", (req, res) => {
       });
     });
 
-    app.listen(PORT, HOST, () => console.log(`Listening on ${HOST}:${PORT}`));
+    app.listen(APP_PORT, APP_HOST, () =>
+      console.log(`Listening on ${APP_HOST}:${APP_PORT}`)
+    );
   } catch (e) {
     console.log(e);
   }

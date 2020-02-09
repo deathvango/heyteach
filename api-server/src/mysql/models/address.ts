@@ -9,10 +9,7 @@ import {
   PrimaryKey,
   Default,
   IsUUID,
-  Unique,
-  AllowNull,
-  ForeignKey,
-  BelongsTo
+  AllowNull
 } from "sequelize-typescript";
 import User from "./user";
 const uuid = require("uuid/v4");

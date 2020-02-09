@@ -9,10 +9,9 @@ import {
   PrimaryKey,
   Default,
   IsUUID,
-  Unique,
-  AllowNull,
   ForeignKey,
-  BelongsTo
+  BelongsTo,
+  AllowNull
 } from "sequelize-typescript";
 import User from "./user";
 import Address from "./address";
@@ -57,6 +56,9 @@ export default class Person extends Model<Person> {
 
   @Column(DataType.STRING(50))
   phone?: string;
+
+  @Column(DataType.STRING(128))
+  email?: string;
 
   @ForeignKey(() => Address)
   addressId?: string;
