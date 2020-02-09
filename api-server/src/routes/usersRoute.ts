@@ -5,8 +5,10 @@ export const users = Router();
 
 users.post("/", async (req, res, next) => {
   try {
-    const user = await User.create(req.body);
+    const body: User = req.body;
+    const user = await User.create(body);
     res.status(201).json(user);
+    return user;
   } catch (e) {
     next(e);
   }

@@ -1,7 +1,6 @@
 import {
   Model,
   Column,
-  BelongsToMany,
   Scopes,
   CreatedAt,
   UpdatedAt,
@@ -10,9 +9,10 @@ import {
   PrimaryKey,
   Default,
   IsUUID,
-  Length,
   Unique,
-  Index
+  Index,
+  NotNull,
+  AllowNull
 } from "sequelize-typescript";
 import { ModelAttributeColumnOptions } from "sequelize/types";
 const uuid = require("uuid/v4");
@@ -35,24 +35,28 @@ export default class User extends Model<User> {
   @Column(DataType.UUID)
   id!: string;
 
+  @AllowNull(false)
   @Column({
     type: DataType.STRING(50),
     comment: ""
   })
   firstName!: string;
 
+  @AllowNull(false)
   @Column(DataType.STRING(50))
   lastName!: string;
 
+  @AllowNull(false)
   @Unique
-  @Index("IX_Users_username")
   @Column(DataType.STRING(50))
   username!: string;
 
+  @AllowNull(false)
   @CreatedAt
   @Column(DataType.DATE)
   createdAt!: Date;
 
+  @AllowNull(false)
   @UpdatedAt
   @Column(DataType.DATE)
   updatedAt!: Date;
