@@ -47,14 +47,4 @@ export default class Address extends Model<Address> {
 
   @Column(DataType.STRING(10))
   zip?: string;
-
-  @AllowNull(false)
-  @CreatedAt
-  @Column(DataType.DATE)
-  createdAt!: Date;
-
-  @AllowNull(false)
-  @UpdatedAt
-  @Column(DataType.DATE)
-  updatedAt!: Date;
 }

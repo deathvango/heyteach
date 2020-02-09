@@ -9,37 +9,27 @@ import {
   PrimaryKey,
   Default,
   IsUUID,
-  Unique,
-  AllowNull,
+  ForeignKey,
   BelongsTo,
-  HasOne
+  AllowNull
 } from "sequelize-typescript";
 import Person from "./person";
 const uuid = require("uuid/v4");
 
-@Scopes(() => ({
-  users: {
-    include: [
-      {
-        model: User,
-        through: { attributes: [] }
-      }
-    ]
-  }
-}))
 @Table
-export default class User extends Model<User> {
+export default class Instructor extends Model<Instructor> {
   @IsUUID(4)
   @PrimaryKey
   @Default(() => uuid())
   @Column(DataType.UUID)
   id!: string;
 
+  @IsUUID(4)
   @AllowNull(false)
-  @Unique
-  @Column(DataType.STRING(50))
-  username!: string;
+  @ForeignKey(() => Person)
+  @Column(DataType.UUID)
+  personId?: string;
 
-  @HasOne(() => Person)
-  person!: Person;
+  @BelongsTo(() => Person)
+  person?: Person;
 }

@@ -1,7 +1,6 @@
 import {
   Model,
   Column,
-  Scopes,
   CreatedAt,
   UpdatedAt,
   Table,
@@ -11,24 +10,14 @@ import {
   IsUUID,
   Unique,
   AllowNull,
-  BelongsTo,
-  HasOne
+  ForeignKey,
+  BelongsTo
 } from "sequelize-typescript";
-import Person from "./person";
+import Category from "./category";
 const uuid = require("uuid/v4");
 
-@Scopes(() => ({
-  users: {
-    include: [
-      {
-        model: User,
-        through: { attributes: [] }
-      }
-    ]
-  }
-}))
 @Table
-export default class User extends Model<User> {
+export default class Course extends Model<Course> {
   @IsUUID(4)
   @PrimaryKey
   @Default(() => uuid())
@@ -36,10 +25,17 @@ export default class User extends Model<User> {
   id!: string;
 
   @AllowNull(false)
-  @Unique
   @Column(DataType.STRING(50))
-  username!: string;
+  name!: string;
 
-  @HasOne(() => Person)
-  person!: Person;
+  @Column(DataType.STRING(255))
+  description?: string;
+
+  @AllowNull(false)
+  @ForeignKey(() => Category)
+  @Column(DataType.UUID)
+  categoryId!: string;
+
+  @BelongsTo(() => Category)
+  category!: Category;
 }

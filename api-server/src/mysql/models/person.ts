@@ -65,14 +65,4 @@ export default class Person extends Model<Person> {
 
   @BelongsTo(() => Address)
   address?: Address;
-
-  @AllowNull(false)
-  @CreatedAt
-  @Column(DataType.DATE)
-  createdAt!: Date;
-
-  @AllowNull(false)
-  @UpdatedAt
-  @Column(DataType.DATE)
-  updatedAt!: Date;
 }
