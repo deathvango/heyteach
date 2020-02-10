@@ -41,5 +41,5 @@ export default class User extends Model<User> {
   username!: string;
 
   @HasOne(() => Person)
-  person!: Person;
+  person?: Person;
 }

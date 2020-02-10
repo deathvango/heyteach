@@ -6,6 +6,14 @@ import { GqlUser } from "../models/gqlUser";
 export const GqlUserQueries: GraphQLFieldConfigMap<any, any> = {
   users: {
     type: new GraphQLList(GqlUser),
+    args: {
+      id: {
+        type: GraphQLString
+      },
+      username: {
+        type: GraphQLString
+      }
+    },
     resolve(root, args) {
       return User.findAll({
         where: args,

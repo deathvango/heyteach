@@ -11,11 +11,14 @@ import {
   IsUUID,
   ForeignKey,
   BelongsTo,
-  AllowNull
+  AllowNull,
+  BelongsToMany
 } from "sequelize-typescript";
 import User from "./user";
 import Address from "./address";
 import Person from "./person";
+import Period from "./period";
+import StudentPeriod from "./studentPeriod";
 const uuid = require("uuid/v4");
 
 @Table
@@ -30,8 +33,14 @@ export default class Student extends Model<Student> {
   @AllowNull(false)
   @ForeignKey(() => Person)
   @Column(DataType.UUID)
-  personId?: string;
+  personId!: string;
 
   @BelongsTo(() => Person)
-  person?: Person;
+  person!: Person;
+
+  @BelongsToMany(
+    () => Period,
+    () => StudentPeriod
+  )
+  periods?: Period[];
 }

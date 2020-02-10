@@ -15,7 +15,7 @@ const uuid = require("uuid/v4");
 export default class CategoryType extends Model<CategoryType> {
   @PrimaryKey
   @Column(DataType.STRING(10))
-  type!: string;
+  typeCode!: string;
 
   @Column(DataType.STRING(255))
   description?: string;

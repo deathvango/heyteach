@@ -34,7 +34,7 @@ export default class Lesson extends Model<Lesson> {
   periodId!: string;
 
   @BelongsTo(() => Period)
-  period?: Course;
+  period?: Period;
 
   @AllowNull(false)
   @Column(DataType.DATE)

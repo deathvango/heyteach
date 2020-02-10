@@ -24,6 +24,7 @@ import Instructor from "./instructor";
 import StudentPeriod from "./studentPeriod";
 import InstructorPeriod from "./instructorPeriod";
 import Category from "./category";
+import Lesson from "./lesson";
 const uuid = require("uuid/v4");
 
 @Table
@@ -63,4 +64,7 @@ export default class Period extends Model<Period> {
     () => InstructorPeriod
   )
   instructors?: Instructor[];
+
+  @HasMany(() => Lesson)
+  lessons?: Lesson[];
 }

@@ -42,7 +42,7 @@ export default class Category extends Model<Category> {
     type: DataType.STRING(10),
     unique: "UC_Category_Name_Type"
   })
-  type!: string;
+  categoryTypeCode!: string;
 
   @BelongsTo(() => CategoryType)
   categoryType!: CategoryType;

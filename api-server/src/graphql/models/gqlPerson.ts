@@ -1,5 +1,6 @@
 import { GraphQLObjectType, GraphQLString } from "graphql";
 import Person from "../../mysql/models/person";
+import { GqlAddress } from "./gqlAddress";
 
 const GqlPerson = new GraphQLObjectType({
   name: "Person",
@@ -39,6 +40,18 @@ const GqlPerson = new GraphQLObjectType({
       type: GraphQLString,
       resolve(person: Person) {
         return person.email;
+      }
+    },
+    addressId: {
+      type: GraphQLString,
+      resolve(person: Person) {
+        return person.addressId;
+      }
+    },
+    address: {
+      type: GqlAddress,
+      resolve(person: Person) {
+        return person.address;
       }
     }
   })

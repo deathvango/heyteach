@@ -30,7 +30,7 @@ export const HeyTeachContext = new Sequelize({
 export const CreateTestData = async () => {
   // Create Category Types
   const catTyp = await CategoryType.create(<CategoryType>{
-    type: "course",
+    typeCode: "course",
     description: "Used to categorize periods"
   });
 
@@ -39,13 +39,13 @@ export const CreateTestData = async () => {
   categories.push(
     await Category.create(<Category>{
       name: "Day Classes",
-      type: catTyp.type
+      categoryTypeCode: catTyp.typeCode
     })
   );
   categories.push(
     await Category.create(<Category>{
       name: "Night Classes",
-      type: catTyp.type
+      categoryTypeCode: catTyp.typeCode
     })
   );
 
@@ -108,6 +108,7 @@ export const CreateTestData = async () => {
         return Instructor.create(<Instructor>{
           personId: p.id
         }).then(instr => {
+          instr.person = p;
           // Assign to period
           InstructorPeriod.create(<InstructorPeriod>{
             instructorId: instr.id,
@@ -163,6 +164,17 @@ export const CreateTestData = async () => {
         })
       );
     }
+  }
+
+  // Create Users
+  if (instructors.length > 0) {
+    User.create(<User>{
+      username: faker.internet.email()
+    }).then(u => {
+      instructors[0].person.update(<Person>{
+        userId: u.id
+      });
+    });
   }
 };
 
