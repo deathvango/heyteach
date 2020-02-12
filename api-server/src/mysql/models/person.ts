@@ -2,8 +2,6 @@ import {
   Model,
   Column,
   Scopes,
-  CreatedAt,
-  UpdatedAt,
   Table,
   DataType,
   PrimaryKey,

@@ -4,12 +4,14 @@ import Link from "next/link";
 
 const Home: NextPage = () => {
   const makeGraphqlRequest = () => {
-    Axios.post(
-      "/graphql",
-      `{
-        rollDice(numDice: 3, numSides: 8)
-      }`,
-    ).then(resp => {
+    Axios.post("/graphql", {
+      query: `query {
+          categories {
+            id
+            name
+          }
+        }`,
+    }).then(resp => {
       console.log("resp: " + resp.data);
     });
   };
