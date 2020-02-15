@@ -50,6 +50,7 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "column",
     minHeight: "100vh",
+    alignItems: "center",
   },
   mainContent: {
     flex: 1,

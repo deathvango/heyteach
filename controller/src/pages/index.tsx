@@ -2,6 +2,7 @@ import Axios from "axios";
 import { NextPage } from "next";
 import Link from "next/link";
 import AdminLayout from "../components/layout/admin.layout";
+import UserInfoContent from "../components/admin/auth-info/users.admin";
 
 const Home: NextPage = () => {
   const makeGraphqlRequest = () => {
@@ -20,7 +21,7 @@ const Home: NextPage = () => {
   return (
     <AdminLayout>
       <div>
-        <Link href="/about">
+        {/* <Link href="/about">
           <a>About Page</a>
         </Link>
         <h1>Hello world!</h1>
@@ -28,7 +29,8 @@ const Home: NextPage = () => {
           <a onClick={makeGraphqlRequest}>
             <h1>CLICK ME</h1>
           </a>
-        </Link>
+        </Link> */}
+        <UserInfoContent />
       </div>
     </AdminLayout>
   );

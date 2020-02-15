@@ -25,7 +25,7 @@ const AdminHeader: React.FC<AdminAppBarProps> = props => {
         </Toolbar>
       </AppBar>
       <AppBar position={"static"} elevation={0}>
-        <Tabs value="1">
+        <Tabs value="1" centered={true}>
           <Tab label="Tab 1" value="1" />
           <Tab label="Tab 2" value="2" />
           <Tab label="Tab 3" value="3" />
@@ -43,6 +43,9 @@ const useStyles = makeStyles(theme => ({
   appBar: {
     paddingLeft: makeUnit(theme.spacing()),
     paddingRight: makeUnit(theme.spacing()),
+  },
+  tabs: {
+    justifyContent: "center",
   },
 }));
 
