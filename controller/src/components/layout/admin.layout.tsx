@@ -11,21 +11,35 @@ import {
   ThemeProvider,
 } from "@material-ui/core";
 import React from "react";
-import AdminAppBar from "../admin/app-bar.admin";
+import AdminHeader from "../admin/header.admin";
 import StandardTheme from "../../themes/standard.theme";
 import { makeUnit, ThemeGlobals } from "../../themes/globals.theme";
+import AdminAppDrawer from "../admin/drawer.admin";
 
 interface AdminLayoutProps {}
 
 const AdminLayout: React.FC<AdminLayoutProps> = props => {
   const classes = useStyles();
+  const [isAppBarOpen, setAppBarOpen] = React.useState(false);
+
+  const openDrawer = () => {
+    setAppBarOpen(true);
+  };
+
+  const closeDrawer = () => {
+    setAppBarOpen(false);
+  };
 
   return (
     <ThemeProvider theme={StandardTheme}>
-      <CssBaseline />
       <div className={classes.root}>
-        <AdminAppBar />
-        <main className={classes.appBarSpacer}>{props.children}</main>
+        <CssBaseline />
+        <AdminHeader onMenuClick={openDrawer} />
+        <AdminAppDrawer open={isAppBarOpen} onCloseMenu={closeDrawer} />
+        <main className={classes.mainContent}>{props.children}</main>
+        <footer className={classes.footer}>
+          <Typography>Footer Stuff Here</Typography>
+        </footer>
       </div>
     </ThemeProvider>
   );
@@ -34,9 +48,14 @@ const AdminLayout: React.FC<AdminLayoutProps> = props => {
 const useStyles = makeStyles(theme => ({
   root: {
     display: "flex",
+    flexDirection: "column",
+    minHeight: "100vh",
   },
-  appBarSpacer: {
-    marginTop: makeUnit(ThemeGlobals.appBar.height),
+  mainContent: {
+    flex: 1,
+  },
+  footer: {
+    textAlign: "center",
   },
 }));
 

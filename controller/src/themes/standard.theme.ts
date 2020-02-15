@@ -7,7 +7,7 @@ const StandardTheme = createMuiTheme({
       main: orange[500],
     },
   },
-  spacing: 0,
+  spacing: 1,
 });
 
 export default StandardTheme;
