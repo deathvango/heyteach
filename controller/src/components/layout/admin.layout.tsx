@@ -15,8 +15,12 @@ import AdminHeader from "../admin/header.admin";
 import StandardTheme from "../../themes/standard.theme";
 import { makeUnit, ThemeGlobals } from "../../themes/globals.theme";
 import AdminAppDrawer from "../admin/drawer.admin";
+import { NavItem } from "../../models/nav-item";
 
-interface AdminLayoutProps {}
+interface AdminLayoutProps {
+  navItems: NavItem[];
+  href: string;
+}
 
 const AdminLayout: React.FC<AdminLayoutProps> = props => {
   const classes = useStyles();
@@ -30,12 +34,25 @@ const AdminLayout: React.FC<AdminLayoutProps> = props => {
     setAppBarOpen(false);
   };
 
+  let selectedNavItem: NavItem = {
+    href: "/",
+  };
+
+  // Get the current navItem
+  for (let i = 0; i < props.navItems.length; ++i) {
+    const item = props.navItems[i];
+    if (item.href === props.href) {
+      selectedNavItem = item;
+      break;
+    }
+  }
+
   return (
     <ThemeProvider theme={StandardTheme}>
       <div className={classes.root}>
         <CssBaseline />
-        <AdminHeader onMenuClick={openDrawer} />
-        <AdminAppDrawer open={isAppBarOpen} onCloseMenu={closeDrawer} />
+        <AdminHeader onMenuClick={openDrawer} navItem={selectedNavItem} />
+        <AdminAppDrawer open={isAppBarOpen} onCloseMenu={closeDrawer} navItems={props.navItems} />
         <main className={classes.mainContent}>{props.children}</main>
         <footer className={classes.footer}>
           <Typography>Footer Stuff Here</Typography>

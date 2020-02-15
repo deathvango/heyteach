@@ -1,9 +1,11 @@
 import PeopleIcon from "@material-ui/icons/People";
-import { Drawer, List, ListItem, ListItemText, ListItemIcon, makeStyles } from "@material-ui/core";
+import { Drawer, List, ListItem, ListItemText, ListItemIcon, makeStyles, Link } from "@material-ui/core";
+import { NavItem } from "../../models/nav-item";
 
 interface AppDrawerProps {
   open: boolean;
   onCloseMenu(): void;
+  navItems: NavItem[];
 }
 
 const AdminAppDrawer: React.FC<AppDrawerProps> = props => {
@@ -18,12 +20,14 @@ const AdminAppDrawer: React.FC<AppDrawerProps> = props => {
   return (
     <Drawer anchor="left" open={props.open} onClick={handleClose} onKeyDown={handleClose}>
       <List>
-        <ListItem button={true}>
-          <ListItemIcon>
-            <PeopleIcon />
-          </ListItemIcon>
-          <ListItemText>Authentication</ListItemText>
-        </ListItem>
+        {props.navItems.map(r => (
+          <Link key={r.href} href={r.href}>
+            <ListItem button={true}>
+              {r.icon && <ListItemIcon>{r.icon}</ListItemIcon>}
+              <ListItemText>{r.name}</ListItemText>
+            </ListItem>
+          </Link>
+        ))}
       </List>
     </Drawer>
   );

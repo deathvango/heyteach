@@ -20,7 +20,7 @@ const Home: NextPage = () => {
   };
 
   return (
-    <AdminLayout navItems={AdminNavItems} href="/index">
+    <AdminLayout navItems={AdminNavItems} href="/users">
       <div>
         {/* <Link href="/about">
           <a>About Page</a>

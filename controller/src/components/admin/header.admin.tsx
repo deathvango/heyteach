@@ -1,8 +1,10 @@
 import { AppBar, Toolbar, IconButton, Typography, Button, makeStyles, Tabs, Tab } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import { makeUnit, ThemeGlobals } from "../../themes/globals.theme";
+import { NavItem } from "../../models/nav-item";
 
 interface AdminAppBarProps {
+  navItem: NavItem;
   onMenuClick(): void;
 }
 
@@ -17,20 +19,22 @@ const AdminHeader: React.FC<AdminAppBarProps> = props => {
             <MenuIcon />
           </IconButton>
           <div>
-            <Typography variant="h6">News</Typography>
+            <Typography variant="h6">{props.navItem.name}</Typography>
           </div>
           <div>
             <Button color="inherit">Login</Button>
           </div>
         </Toolbar>
       </AppBar>
-      <AppBar position={"static"} elevation={0}>
-        <Tabs value="1" centered={true}>
-          <Tab label="Tab 1" value="1" />
-          <Tab label="Tab 2" value="2" />
-          <Tab label="Tab 3" value="3" />
-        </Tabs>
-      </AppBar>
+      {props.navItem && props.navItem.subRoutes && (
+        <AppBar position={"static"} elevation={0}>
+          <Tabs value="1" centered={true}>
+            {props.navItem.subRoutes.map(r => {
+              return <Tab key={r.href} label={r.name} value={r.href} />;
+            })}
+          </Tabs>
+        </AppBar>
+      )}
     </>
   );
 };

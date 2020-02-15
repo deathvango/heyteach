@@ -18,7 +18,7 @@ const UserInfoContent = () => {
     <Paper className={classes.root}>
       <Typography variant="h2">Users</Typography>
       {usersList.map(u => (
-        <div>
+        <div key={u.id}>
           {u.id} - {u.username}
         </div>
       ))}
