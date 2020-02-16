@@ -1,7 +1,5 @@
 import { NextPage } from "next";
-import { Typography, List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
-import AdminLayout from "../../components/layout/admin.layout";
-import { AdminNavItems } from "../../models/nav-items.admin";
+import { List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
 import { Category } from "../../models/category";
 import React from "react";
 import { useDispatch } from "react-redux";
