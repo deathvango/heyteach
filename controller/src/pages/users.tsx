@@ -1,6 +1,5 @@
 import Axios from "axios";
 import { NextPage } from "next";
-import Link from "next/link";
 import AdminLayout from "../components/layout/admin.layout";
 import UserInfoContent from "../components/admin/auth-info/users.admin";
 import { AdminNavItems } from "../components/admin/nav-items.admin";
