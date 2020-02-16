@@ -13,9 +13,6 @@ const AdminHeader: React.FC<AdminAppBarProps> = props => {
   const router = useRouter();
   const classes = useStyles();
 
-  console.log("router.pathname: " + router.pathname);
-  console.log("routes: " + JSON.stringify(props.navItem));
-
   return (
     <>
       <AppBar className={classes.appBar} position={"sticky"} elevation={0}>
