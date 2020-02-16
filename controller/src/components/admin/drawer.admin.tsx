@@ -1,6 +1,7 @@
-import { Drawer, List, ListItem, ListItemText, ListItemIcon, makeStyles, Link } from "@material-ui/core";
+import { Drawer, List, ListItem, ListItemText, ListItemIcon, makeStyles } from "@material-ui/core";
 import { NavItem } from "../../models/nav-item";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 interface AppDrawerProps {
   open: boolean;
