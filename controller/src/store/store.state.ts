@@ -1,3 +1,3 @@
-export interface ReduxState {
+export interface StoreState {
   currentTab: string;
 }

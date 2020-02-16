@@ -1,5 +1,5 @@
-import { ReduxState } from "./store.state";
+import { StoreState } from "./store.state";
 
-export const initialState: ReduxState = {
+export const initialState: StoreState = {
   currentTab: "",
 };

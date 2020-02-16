@@ -1,7 +1,7 @@
 import { initialState } from "../store/initial-state.state";
-import { ReduxState } from "../store/store.state";
+import { StoreState } from "../store/store.state";
 
-const currentTabReducer = (state: ReduxState = initialState, action: any): ReduxState => {
+export const currentTabReducer = (state: StoreState = initialState, action: any): StoreState => {
   switch (action.type) {
     case "TEST":
       return { ...state, currentTab: action.payload };

@@ -48,17 +48,15 @@ const AdminLayout: React.FC<AdminLayoutProps> = props => {
   });
 
   return (
-    <ThemeProvider theme={StandardTheme}>
-      <div className={classes.root}>
-        <CssBaseline />
-        <AdminHeader onMenuClick={openDrawer} navItem={selectedNavItem} />
-        <AdminAppDrawer open={isAppBarOpen} onCloseMenu={closeDrawer} navItems={props.navItems} />
-        <main className={classes.mainContent}>{props.children}</main>
-        <footer className={classes.footer}>
-          <Typography>Footer Stuff Here</Typography>
-        </footer>
-      </div>
-    </ThemeProvider>
+    <div className={classes.root}>
+      <CssBaseline />
+      <AdminHeader onMenuClick={openDrawer} navItem={selectedNavItem} />
+      <AdminAppDrawer open={isAppBarOpen} onCloseMenu={closeDrawer} navItems={props.navItems} />
+      <main className={classes.mainContent}>{props.children}</main>
+      <footer className={classes.footer}>
+        <Typography>Footer Stuff Here</Typography>
+      </footer>
+    </div>
   );
 };
 

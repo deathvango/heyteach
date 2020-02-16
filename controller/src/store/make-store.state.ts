@@ -1,9 +1,9 @@
 import { MakeStore } from "next-redux-wrapper";
 import { createStore } from "redux";
-import { ReduxState } from "./store.state";
+import { StoreState } from "./store.state";
 import { initialState } from "./initial-state.state";
 
-const currentTabReducer = (state: ReduxState = initialState, action: any): ReduxState => {
+const currentTabReducer = (state: StoreState = initialState, action: any): StoreState => {
   switch (action.type) {
     case "TEST":
       return { ...state, currentTab: action.payload };
