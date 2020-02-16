@@ -19,9 +19,8 @@ const Home: NextPage = () => {
   };
 
   return (
-    <AdminLayout navItems={AdminNavItems} href="/users">
-      <div>
-        {/* <Link href="/about">
+    <div>
+      {/* <Link href="/about">
           <a>About Page</a>
         </Link>
         <h1>Hello world!</h1>
@@ -30,9 +29,8 @@ const Home: NextPage = () => {
             <h1>CLICK ME</h1>
           </a>
         </Link> */}
-        <UserInfoContent />
-      </div>
-    </AdminLayout>
+      <UserInfoContent />
+    </div>
   );
 };
 

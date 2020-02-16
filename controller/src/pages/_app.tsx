@@ -6,6 +6,8 @@ import { makeStore } from "../store/make-store.state";
 import { Store } from "redux";
 import { ThemeProvider } from "@material-ui/core";
 import StandardTheme from "../themes/standard.theme";
+import AdminLayout from "../components/layout/admin.layout";
+import { AdminNavItems } from "../models/nav-items.admin";
 
 interface AppProps {
   store: Store;
@@ -26,7 +28,9 @@ class HeyTeachApp extends App<AppProps> {
     return (
       <ThemeProvider theme={StandardTheme}>
         <Provider store={store}>
-          <Component {...pageProps} />
+          <AdminLayout navItems={AdminNavItems}>
+            <Component {...pageProps} />
+          </AdminLayout>
         </Provider>
       </ThemeProvider>
     );

@@ -1,5 +1,5 @@
-import { NextPage, NextPageContext } from "next";
-import { Typography, Button } from "@material-ui/core";
+import { NextPage } from "next";
+import { Typography, Button, List, ListItemIcon, ListItem, ListItemText } from "@material-ui/core";
 import AdminLayout from "../../components/layout/admin.layout";
 import { AdminNavItems } from "../../models/nav-items.admin";
 import { useDispatch, connect } from "react-redux";
@@ -10,6 +10,8 @@ import { Course } from "../../models/course";
 import ActionHandler from "../../actions/action-handler.type";
 import { ActionKeys } from "../../actions/action-keys.type";
 import { CoursesApi } from "../../api/courses.api";
+import PageContent from "../../components/common/page-content.component";
+import EditTwoToneIcon from "@material-ui/icons/EditTwoTone";
 
 interface CoursePageProps {
   courses: Course[];
@@ -17,28 +19,40 @@ interface CoursePageProps {
 
 const CoursesPage: NextPage<CoursePageProps> = props => {
   const dispatch = useDispatch();
-  const fetchCourses = async () => {
-    await ActionHandler.Execute(dispatch, ActionKeys.GetCourses, CoursesApi.GetUsers);
-  };
+  const [isLoading, setLoading] = React.useState(false);
+
+  React.useEffect(() => {
+    if (props.courses && props.courses.length > 0) {
+      return;
+    }
+
+    const exec = async () => {
+      await ActionHandler.Execute(dispatch, ActionKeys.GetCourses, CoursesApi.GetUsers);
+      setLoading(false);
+    };
+    setLoading(true);
+    exec();
+  }, []);
 
   return (
-    <AdminLayout navItems={AdminNavItems} href="/index">
-      <div>
-        <Typography>Courses Page</Typography>
-        {props.courses && props.courses.length > 0 && (
-          <ul>
-            {props.courses.map(c => {
-              return <li>{c.name}</li>;
-            })}
-          </ul>
-        )}
-        <Button onClick={fetchCourses}>Update Redux State</Button>
-      </div>
-    </AdminLayout>
+    <PageContent title="Course List" loading={isLoading}>
+      {props.courses && props.courses.length > 0 && (
+        <List>
+          {props.courses.map(c => (
+            <ListItem button={true}>
+              <ListItemIcon>
+                <EditTwoToneIcon />
+              </ListItemIcon>
+              <ListItemText primary={c.name} secondary={c.description} />
+            </ListItem>
+          ))}
+        </List>
+      )}
+    </PageContent>
   );
 };
 
-CoursesPage.getInitialProps = async ({ store, isServer, pathname, query }: NextJSContext) => {
+CoursesPage.getInitialProps = async ({ store }: NextJSContext) => {
   return mapStateToProps(store.getState());
 };
 

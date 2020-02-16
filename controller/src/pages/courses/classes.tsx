@@ -5,11 +5,9 @@ import { AdminNavItems } from "../../models/nav-items.admin";
 
 const ClassesPage: NextPage = () => {
   return (
-    <AdminLayout navItems={AdminNavItems} href="/index">
-      <div>
-        <Typography>Classes Page</Typography>
-      </div>
-    </AdminLayout>
+    <div>
+      <Typography>Classes Page</Typography>
+    </div>
   );
 };
 

@@ -20,7 +20,6 @@ import { useRouter } from "next/router";
 
 interface AdminLayoutProps {
   navItems: NavItem[];
-  href: string;
 }
 
 const AdminLayout: React.FC<AdminLayoutProps> = props => {

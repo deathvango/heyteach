@@ -2,11 +2,13 @@ import Axios from "axios";
 import { ApiGlobals } from "../api/globals.api";
 import { User } from "../models/user";
 import { Course } from "../models/course";
+import { Category } from "../models/category";
 
 export interface GQLR {
   data: {
     users: User[];
     courses: Course[];
+    categories: Category[];
   };
   errors: {
     message: string;
