@@ -1,3 +1,7 @@
+import { Course } from "../models/course";
+import { User } from "../models/user";
+
 export interface StoreState {
-  currentTab: string;
+  courses: Course[];
+  users: User[];
 }

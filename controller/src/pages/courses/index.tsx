@@ -5,31 +5,34 @@ import { AdminNavItems } from "../../models/nav-items.admin";
 import { useDispatch, connect } from "react-redux";
 import { NextJSContext } from "next-redux-wrapper";
 import React from "react";
-import { currentTabReducer } from "../../reducers/curent-tab.reducer";
-import { initialState } from "../../store/initial-state.state";
 import { StoreState } from "../../store/store.state";
 import { Course } from "../../models/course";
+import ActionHandler from "../../actions/action-handler.type";
+import { ActionKeys } from "../../actions/action-keys.type";
+import { CoursesApi } from "../../api/courses.api";
 
 interface CoursePageProps {
-  currentTab: string;
   courses: Course[];
 }
 
 const CoursesPage: NextPage<CoursePageProps> = props => {
   const dispatch = useDispatch();
-  const triggerChange = () => {
-    dispatch({
-      type: "TEST",
-      payload: "Hello World!",
-    });
+  const fetchCourses = async () => {
+    await ActionHandler.Execute(dispatch, ActionKeys.GetCourses, CoursesApi.GetUsers);
   };
 
   return (
     <AdminLayout navItems={AdminNavItems} href="/index">
       <div>
         <Typography>Courses Page</Typography>
-        <Typography>Redux Text: {props.currentTab}</Typography>
-        <Button onClick={triggerChange}>Update Redux State</Button>
+        {props.courses && props.courses.length > 0 && (
+          <ul>
+            {props.courses.map(c => {
+              return <li>{c.name}</li>;
+            })}
+          </ul>
+        )}
+        <Button onClick={fetchCourses}>Update Redux State</Button>
       </div>
     </AdminLayout>
   );
@@ -40,10 +43,8 @@ CoursesPage.getInitialProps = async ({ store, isServer, pathname, query }: NextJ
 };
 
 const mapStateToProps = (state: StoreState): CoursePageProps => {
-  console.log(JSON.stringify(state));
   return {
-    currentTab: state.currentTab,
-    courses: [],
+    courses: state.courses,
   };
 };
 
