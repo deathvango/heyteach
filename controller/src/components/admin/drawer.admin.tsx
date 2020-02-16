@@ -1,4 +1,3 @@
-import PeopleIcon from "@material-ui/icons/People";
 import { Drawer, List, ListItem, ListItemText, ListItemIcon, makeStyles, Link } from "@material-ui/core";
 import { NavItem } from "../../models/nav-item";
 import { useRouter } from "next/router";

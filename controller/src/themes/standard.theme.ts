@@ -1,10 +1,10 @@
 import { createMuiTheme } from "@material-ui/core/styles";
-import { orange } from "@material-ui/core/colors";
+import { blue } from "@material-ui/core/colors";
 
 const StandardTheme = createMuiTheme({
   palette: {
     primary: {
-      main: orange[500],
+      main: blue[500],
     },
   },
   spacing: 1,
