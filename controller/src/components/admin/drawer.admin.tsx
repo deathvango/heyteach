@@ -1,6 +1,7 @@
 import PeopleIcon from "@material-ui/icons/People";
 import { Drawer, List, ListItem, ListItemText, ListItemIcon, makeStyles, Link } from "@material-ui/core";
 import { NavItem } from "../../models/nav-item";
+import { useRouter } from "next/router";
 
 interface AppDrawerProps {
   open: boolean;
@@ -9,6 +10,7 @@ interface AppDrawerProps {
 }
 
 const AdminAppDrawer: React.FC<AppDrawerProps> = props => {
+  const router = useRouter();
   const classes = useStyles();
 
   const handleClose = () => {
@@ -17,12 +19,19 @@ const AdminAppDrawer: React.FC<AppDrawerProps> = props => {
     }
   };
 
+  let selectedPath = "";
+  props.navItems.forEach(r => {
+    if (r.root || router.pathname.startsWith(r.href)) {
+      selectedPath = r.href;
+    }
+  });
+
   return (
     <Drawer anchor="left" open={props.open} onClick={handleClose} onKeyDown={handleClose}>
       <List>
         {props.navItems.map(r => (
           <Link key={r.href} href={r.href}>
-            <ListItem button={true}>
+            <ListItem button={true} selected={r.href === selectedPath}>
               {r.icon && <ListItemIcon>{r.icon}</ListItemIcon>}
               <ListItemText>{r.name}</ListItemText>
             </ListItem>

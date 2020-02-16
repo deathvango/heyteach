@@ -1,24 +1,30 @@
-import { NavItem } from "../../models/nav-item";
+import { NavItem } from "./nav-item";
 import SchoolIcon from "@material-ui/icons/School";
 import PeopleIcon from "@material-ui/icons/People";
+import HomeIcon from "@material-ui/icons/Home";
 
 export const AdminNavItems: NavItem[] = [
   {
-    href: "/index",
+    href: "/",
     name: "Home",
     root: true,
+    icon: <HomeIcon />,
+  },
+  {
+    href: "/courses",
+    name: "Courses",
     icon: <SchoolIcon />,
     subRoutes: [
       {
-        href: "/index/courses",
+        href: "/courses",
         name: "Courses",
       },
       {
-        href: "/index/periods",
+        href: "/courses/periods",
         name: "Periods",
       },
       {
-        href: "/index/classes",
+        href: "/courses/classes",
         name: "Classes",
       },
     ],

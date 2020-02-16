@@ -16,6 +16,7 @@ import StandardTheme from "../../themes/standard.theme";
 import { makeUnit, ThemeGlobals } from "../../themes/globals.theme";
 import AdminAppDrawer from "../admin/drawer.admin";
 import { NavItem } from "../../models/nav-item";
+import { useRouter } from "next/router";
 
 interface AdminLayoutProps {
   navItems: NavItem[];
@@ -23,6 +24,7 @@ interface AdminLayoutProps {
 }
 
 const AdminLayout: React.FC<AdminLayoutProps> = props => {
+  const router = useRouter();
   const classes = useStyles();
   const [isAppBarOpen, setAppBarOpen] = React.useState(false);
 
@@ -39,13 +41,11 @@ const AdminLayout: React.FC<AdminLayoutProps> = props => {
   };
 
   // Get the current navItem
-  for (let i = 0; i < props.navItems.length; ++i) {
-    const item = props.navItems[i];
-    if (item.href === props.href) {
-      selectedNavItem = item;
-      break;
+  props.navItems.forEach(r => {
+    if (router.pathname.startsWith(r.href)) {
+      selectedNavItem = r;
     }
-  }
+  });
 
   return (
     <ThemeProvider theme={StandardTheme}>

@@ -2,6 +2,7 @@ import { AppBar, Toolbar, IconButton, Typography, Button, makeStyles, Tabs, Tab 
 import MenuIcon from "@material-ui/icons/Menu";
 import { makeUnit, ThemeGlobals } from "../../themes/globals.theme";
 import { NavItem } from "../../models/nav-item";
+import { useRouter } from "next/router";
 
 interface AdminAppBarProps {
   navItem: NavItem;
@@ -9,7 +10,11 @@ interface AdminAppBarProps {
 }
 
 const AdminHeader: React.FC<AdminAppBarProps> = props => {
+  const router = useRouter();
   const classes = useStyles();
+
+  console.log("router.pathname: " + router.pathname);
+  console.log("routes: " + JSON.stringify(props.navItem));
 
   return (
     <>
@@ -28,9 +33,9 @@ const AdminHeader: React.FC<AdminAppBarProps> = props => {
       </AppBar>
       {props.navItem && props.navItem.subRoutes && (
         <AppBar position={"static"} elevation={0}>
-          <Tabs value="1" centered={true}>
+          <Tabs value={router.pathname} centered={true}>
             {props.navItem.subRoutes.map(r => {
-              return <Tab key={r.href} label={r.name} value={r.href} />;
+              return <Tab key={r.href} label={r.name} value={r.href} onClick={() => router.push(r.href)} />;
             })}
           </Tabs>
         </AppBar>
