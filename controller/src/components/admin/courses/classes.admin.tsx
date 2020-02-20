@@ -1,7 +1,7 @@
-import { Typography } from "@material-ui/core";
+import { Text } from "@chakra-ui/core";
 
 const AdminClassesView = () => {
-  return <Typography variant="h2">Classes</Typography>;
+  return <Text>Classes</Text>;
 };
 
 export default AdminClassesView;

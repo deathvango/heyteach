@@ -1,12 +1,12 @@
 import { NextPage } from "next";
-import { Typography } from "@material-ui/core";
+import { Text } from "@chakra-ui/core";
 import AdminLayout from "../../components/layout/admin.layout";
 import { AdminNavItems } from "../../models/nav-items.admin";
 
 const ClassesPage: NextPage = () => {
   return (
     <div>
-      <Typography>Classes Page</Typography>
+      <Text>Classes Page</Text>
     </div>
   );
 };

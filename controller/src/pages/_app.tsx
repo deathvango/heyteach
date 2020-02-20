@@ -1,13 +1,13 @@
 import React from "react";
 import { Provider } from "react-redux";
-import App, { Container, AppContext } from "next/app";
+import App, { AppContext } from "next/app";
 import withRedux from "next-redux-wrapper";
 import { makeStore } from "../store/make-store.state";
 import { Store } from "redux";
-import { ThemeProvider } from "@material-ui/core";
 import StandardTheme from "../themes/standard.theme";
 import AdminLayout from "../components/layout/admin.layout";
 import { AdminNavItems } from "../models/nav-items.admin";
+import { ThemeProvider, CSSReset, ColorModeProvider } from "@chakra-ui/core";
 
 interface AppProps {
   store: Store;
@@ -27,11 +27,14 @@ class HeyTeachApp extends App<AppProps> {
     const { Component, pageProps, store } = this.props;
     return (
       <ThemeProvider theme={StandardTheme}>
-        <Provider store={store}>
-          <AdminLayout navItems={AdminNavItems}>
-            <Component {...pageProps} />
-          </AdminLayout>
-        </Provider>
+        <CSSReset />
+        <ColorModeProvider>
+          <Provider store={store}>
+            <AdminLayout navItems={AdminNavItems}>
+              <Component {...pageProps} />
+            </AdminLayout>
+          </Provider>
+        </ColorModeProvider>
       </ThemeProvider>
     );
   }

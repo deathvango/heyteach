@@ -1,13 +1,8 @@
-import { createMuiTheme } from "@material-ui/core/styles";
-import { blue } from "@material-ui/core/colors";
+import { theme } from "@chakra-ui/core";
 
-const StandardTheme = createMuiTheme({
-  palette: {
-    primary: {
-      main: blue[500],
-    },
-  },
+const StandardTheme = {
+  ...theme,
   spacing: 1,
-});
+};
 
 export default StandardTheme;

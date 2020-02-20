@@ -1,11 +1,10 @@
-import { Paper, Typography, makeStyles } from "@material-ui/core";
 import React from "react";
+import { Text, Box } from "@chakra-ui/core";
 import { UsersApi } from "../../../api/users.api";
 import { User } from "../../../models/user";
 import { makeUnit } from "../../../themes/globals.theme";
 
 const UserInfoContent = () => {
-  const classes = useStyles();
   const [usersList, setUsersList] = React.useState<User[]>([]);
 
   React.useEffect(() => {
@@ -15,22 +14,22 @@ const UserInfoContent = () => {
   }, []);
 
   return (
-    <Paper className={classes.root}>
-      <Typography variant="h2">Users</Typography>
+    <Box>
+      <Text>Users</Text>
       {usersList.map(u => (
         <div key={u.id}>
           {u.id} - {u.username}
         </div>
       ))}
-    </Paper>
+    </Box>
   );
 };
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    padding: makeUnit(theme.spacing()),
-    marginTop: makeUnit(theme.spacing()),
-  },
-}));
+// const useStyles = makeStyles(theme => ({
+//   root: {
+//     padding: makeUnit(theme.spacing()),
+//     marginTop: makeUnit(theme.spacing()),
+//   },
+// }));
 
 export default UserInfoContent;

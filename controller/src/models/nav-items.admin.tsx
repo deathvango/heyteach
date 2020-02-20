@@ -1,19 +1,16 @@
 import { NavItem } from "./nav-item";
-import SchoolIcon from "@material-ui/icons/School";
-import PeopleIcon from "@material-ui/icons/People";
-import HomeIcon from "@material-ui/icons/Home";
 
 export const AdminNavItems: NavItem[] = [
   {
     href: "/",
     name: "Home",
     root: true,
-    icon: <HomeIcon />,
+    // icon: <HomeIcon />,
   },
   {
     href: "/courses",
     name: "Courses",
-    icon: <SchoolIcon />,
+    // icon: <SchoolIcon />,
     subRoutes: [
       {
         href: "/courses",
@@ -32,6 +29,6 @@ export const AdminNavItems: NavItem[] = [
   {
     href: "/users",
     name: "Users",
-    icon: <PeopleIcon />,
+    // icon: <PeopleIcon />,
   },
 ];

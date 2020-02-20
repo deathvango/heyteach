@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import { Typography, Button, List, ListItemIcon, ListItem, ListItemText } from "@material-ui/core";
+import { Text, List, ListItem } from "@chakra-ui/core";
 import AdminLayout from "../../components/layout/admin.layout";
 import { AdminNavItems } from "../../models/nav-items.admin";
 import { useDispatch, connect } from "react-redux";
@@ -11,7 +11,6 @@ import ActionHandler from "../../actions/action-handler.type";
 import { ActionKeys } from "../../actions/action-keys.type";
 import { CoursesApi } from "../../api/courses.api";
 import PageContent from "../../components/common/page-content.component";
-import EditTwoToneIcon from "@material-ui/icons/EditTwoTone";
 
 interface CoursePageProps {
   courses: Course[];
@@ -39,11 +38,14 @@ const CoursesPage: NextPage<CoursePageProps> = props => {
       {props.courses && props.courses.length > 0 && (
         <List>
           {props.courses.map(c => (
-            <ListItem button={true}>
-              <ListItemIcon>
+            <ListItem>
+              {/* <ListItemIcon>
                 <EditTwoToneIcon />
-              </ListItemIcon>
-              <ListItemText primary={c.name} secondary={c.description} />
+              </ListItemIcon> */}
+              <Text>
+                {c.name} {c.description}
+              </Text>
+              {/* <ListItemText primary={c.name} secondary={c.description} /> */}
             </ListItem>
           ))}
         </List>

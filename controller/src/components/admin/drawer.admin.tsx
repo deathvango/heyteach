@@ -1,4 +1,4 @@
-import { Drawer, List, ListItem, ListItemText, ListItemIcon, makeStyles } from "@material-ui/core";
+import { Drawer, List, useDisclosure } from "@chakra-ui/core";
 import { NavItem } from "../../models/nav-item";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -11,7 +11,7 @@ interface AppDrawerProps {
 
 const AdminAppDrawer: React.FC<AppDrawerProps> = props => {
   const router = useRouter();
-  const classes = useStyles();
+  const { onClose } = useDisclosure();
 
   const handleClose = () => {
     if (props.open) {
@@ -27,23 +27,17 @@ const AdminAppDrawer: React.FC<AppDrawerProps> = props => {
   });
 
   return (
-    <Drawer anchor="left" open={props.open} onClick={handleClose} onKeyDown={handleClose}>
+    <Drawer placement="left" isOpen={props.open} onClose={onClose}>
       <List>
         {props.navItems.map(r => (
           <Link key={r.href} href={r.href}>
-            <ListItem button={true} selected={r.href === selectedPath}>
-              {r.icon && <ListItemIcon>{r.icon}</ListItemIcon>}
-              <ListItemText>{r.name}</ListItemText>
-            </ListItem>
+            {r.icon && <span>{r.icon}</span>}
+            {r.name}
           </Link>
         ))}
       </List>
     </Drawer>
   );
 };
-
-const useStyles = makeStyles(theme => ({
-  iconItem: {},
-}));
 
 export default AdminAppDrawer;

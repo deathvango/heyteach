@@ -1,7 +1,7 @@
-import { Typography } from "@material-ui/core";
+import { Text } from "@chakra-ui/core";
 
 const AdminPeriodsView = () => {
-  return <Typography variant="h2">Periods</Typography>;
+  return <Text>Periods</Text>;
 };
 
 export default AdminPeriodsView;
