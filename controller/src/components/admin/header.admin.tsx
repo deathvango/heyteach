@@ -13,7 +13,7 @@ const AdminHeader: React.FC<AdminAppBarProps> = props => {
 
   return (
     <>
-      <AppBar />
+      <AppBar onMenuClick={props.onMenuClick} />
       {/* <AppBar className={classes.appBar} position={"sticky"} elevation={0}>
         <Toolbar className={classes.toolbar}>
           <IconButton edge="start" color="inherit" aria-label="menu" onClick={props.onMenuClick}>
@@ -28,7 +28,8 @@ const AdminHeader: React.FC<AdminAppBarProps> = props => {
         </Toolbar>
       </AppBar> */}
       {props.navItem && props.navItem.subRoutes && (
-        <AppBar />
+        <div />
+        // <AppBar />
         // <AppBar position={"static"} elevation={0}>
         //   <Tabs value={router.pathname} centered={true}>
         //     {props.navItem.subRoutes.map(r => {

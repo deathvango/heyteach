@@ -7,4 +7,5 @@ export const ThemeGlobals = {
     height: 4,
   },
   unit: "rem",
+  spacing: 1,
 };

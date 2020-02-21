@@ -1,7 +1,9 @@
+import { IconType } from "react-icons/lib/cjs";
+
 export interface NavItem {
   href: string;
   name?: string;
-  icon?: JSX.Element;
+  icon?: IconType;
   root?: boolean;
   subRoutes?: NavItem[];
 }

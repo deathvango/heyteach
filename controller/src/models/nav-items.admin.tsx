@@ -1,16 +1,17 @@
 import { NavItem } from "./nav-item";
+import { MdHome, MdSchool, MdPeople } from "react-icons/md";
 
 export const AdminNavItems: NavItem[] = [
   {
     href: "/",
     name: "Home",
     root: true,
-    // icon: <HomeIcon />,
+    icon: MdHome,
   },
   {
     href: "/courses",
     name: "Courses",
-    // icon: <SchoolIcon />,
+    icon: MdSchool,
     subRoutes: [
       {
         href: "/courses",
@@ -29,6 +30,6 @@ export const AdminNavItems: NavItem[] = [
   {
     href: "/users",
     name: "Users",
-    // icon: <PeopleIcon />,
+    icon: MdPeople,
   },
 ];
